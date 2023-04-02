@@ -1,4 +1,4 @@
-# Heart_rate_dectection_in_voice
+# Heart's rate dectection in voice
  
 ### Contributors: Nadia Guerouaou Matthieu Fraticelli Maublanc Paul Jean-Julien Aucouturier
 

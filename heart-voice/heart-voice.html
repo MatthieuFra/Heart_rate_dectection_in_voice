@@ -38,34 +38,11 @@ Inspired by Galvez-Pol et al's (2022) results describing our ability to depict H
 AUTHOR: Matthieu Fraticelli / fraticelli.matthieu@hotmail.fr
 
 
-TO DO : 
-
-- ajouter param in json
-
-*/
-
-  /* _______________________________________________________________________________________
-PARAMETRES */
-
-/*
-const VIDEOS = [
-  "vid/TEST2.mp4",
-  "vid/TEST3.mp4",
-  "vid/TEST2.mp4",
-  "vid/TEST3.mp4",
-  ];
-
-const VIDEOS_TRAINING = [
-  "vid/TEST2.mp4",
-  "vid/TEST2.mp4",
-  ];
-
-const CONSIGNE1 = `INSERER CONSIGNES 1`;
-const CONSIGNE2 = `INSERER CONSIGNES 2`;
-const CONSIGNE3 = `INSERER CONSIGNES 3`;
-//const CONSIGNE1 = ``;
-
-const EMAIL = "example@mail.com";
+- DATA TASK A,
+- DATA ORDER OF TASK, 
+- Play pairs from json
+- age negatif
+- Jupyternotebook
 
 */
 
@@ -82,7 +59,7 @@ var jsPsych = initJsPsych({
       message_progress_bar: 'Progression expérience',
       on_finish: function() {
       //jsPsych.data.displayData(); 
-        jsPsych.data.get().localSave('csv','mydata.csv');
+        jsPsych.data.get().localSave('csv',`${uniqueID}_data.csv`);
        },
       on_trial_start: function() {
        },
@@ -98,9 +75,9 @@ var timeline = [];
 //CODE BELOW -------------------------------------------------------------------------------------------------------------
 
 
-
+/*
 //creating of the pairs  
-var arrayElements = VIDEOS;
+var arrayElements = VIDEOS1;
 
 
 const pairsOfArray = array => (
@@ -116,20 +93,20 @@ var pairsArray = pairsOfArray(jsPsych.randomization.shuffle(arrayElements));
 pairsArray = jsPsych.randomization.shuffle(pairsArray)
 console.log(pairsArray)
 
- 
-//preload sound and video     
-var preload = {
-   type: jsPsychPreload,
-   video: VIDEOS,
-  };
-    
-timeline.push(preload);
- 
-  
+*/
+
+// shuffle the three videos array
+var videos1 = jsPsych.randomization.shuffle(VIDEOS1)
+var videos2 = jsPsych.randomization.shuffle(VIDEOS2)
+var videos3 = jsPsych.randomization.shuffle(VIDEOS3)
+
+
+/*  
 var numbVidsEval = arrayElements.length
 console.log(`Number of videos is: ${numbVidsEval}`)
+*/
 
-var numbVideosEvalPairs = pairsArray.length
+var numbVideosEvalPairs = videos1.length
 console.log(`Number of videos pairs is: ${numbVideosEvalPairs}`)
 
 
@@ -147,7 +124,10 @@ console.log(`Number of videos pairs is: ${numbVideosEvalPairs}`)
  var sex; 
  var soundSystem1;
  var confidence;
-
+ var wichTask;
+ var orderTask; 
+ var k = 0;
+ var currentVid
 
 
  /*var preloadBeforeTask = {
@@ -157,6 +137,36 @@ console.log(`Number of videos pairs is: ${numbVideosEvalPairs}`)
     },
   };*/
 
+ // In order to assign the correct ABC order based on the PARTICIPANT number 
+ function orderABC(){
+  if(PARTICIPANT > 0 && PARTICIPANT < 5){
+    orderTask = [1,2,3]
+    console.log(`Participant is ${PARTICIPANT}, order will be ${orderTask}`)
+    return orderTask
+  } else if(PARTICIPANT > 4 && PARTICIPANT < 9){
+    orderTask = [1,3,2]
+    console.log(`Participant is ${PARTICIPANT}, order will be ${orderTask}`)
+    return orderTask
+  } else if(PARTICIPANT > 8 && PARTICIPANT < 13){
+    orderTask = [2,1,3]
+    console.log(`Participant is ${PARTICIPANT}, order will be ${orderTask}`)
+    return orderTask
+  } else if(PARTICIPANT > 12 && PARTICIPANT < 17){
+    orderTask = [2,3,1]
+    console.log(`Participant is ${PARTICIPANT}, order will be ${orderTask}`)
+    return orderTask
+  } else if(PARTICIPANT > 16 && PARTICIPANT < 21){
+    orderTask = [3,2,1]
+    console.log(`Participant is ${PARTICIPANT}, order will be ${orderTask}`)
+    return orderTask
+  } else if(PARTICIPANT > 20 && PARTICIPANT < 15){
+    orderTask = [3,1,2]
+    console.log(`Participant is ${PARTICIPANT}, order will be ${orderTask}`)
+    return orderTask
+  }
+ };
+
+orderABC()
 
  // Display without the "response" part showed
  function html1(){ 
@@ -178,11 +188,11 @@ console.log(`Number of videos pairs is: ${numbVideosEvalPairs}`)
             <div style="display: flex; justify-content: space-between;"">
 
                 <video width="320" height="240" ${whitchVideo[0]}>
-                   <source src="${pairsArray[i][0]}" type="video/mp4">
+                   <source src="${currentVid[i][0]}" type="video/mp4">
                 </video>
 
                 <video width="320" height="240" ${whitchVideo[1]}>
-                   <source src="${pairsArray[i][1]}" type="video/mp4">
+                   <source src="${currentVid[i][1]}" type="video/mp4">
                 </video>
 
           </div>
@@ -242,11 +252,11 @@ console.log(`Number of videos pairs is: ${numbVideosEvalPairs}`)
             <div style="display: flex; justify-content: space-between;"">
 
                 <video width="320" height="240" ${whitchVideo[0]}>
-                   <source src="${pairsArray[i][0]}" type="video/mp4">
+                   <source src="${currentVid[i][0]}" type="video/mp4">
                 </video>
 
                 <video width="320" height="240" ${whitchVideo[1]}>
-                   <source src="${pairsArray[i][1]}" type="video/mp4">
+                   <source src="${currentVid[i][1]}" type="video/mp4">
                 </video>
 
           </div>
@@ -580,6 +590,18 @@ var videoTask = {
         type: jsPsychHtmlKeyboardResponse,
         stimulus: function(){
            console.log(`Training is ${isTraining}`)
+           console.log(`K is ${k}`)
+           wichTask = orderTask[k]
+           if(wichTask === 1){
+            currentVid = videos1
+           } else if(wichTask === 2){
+            currentVid = videos2
+           } else if(wichTask === 3){
+            currentVid = videos2
+           }
+
+           console.log(`Current video is ${wichTask} with ${currentVid}`)
+
            if(isTraining === true){
               if(viewedVideo[0] === true && viewedVideo[1] === true){
                 return html2training()
@@ -630,7 +652,7 @@ var loopVideoTask = {
             whitchVideo[0] = ''
             whitchVideo[1] = ''
             console.log(whitchVideo)
-            choosedVideo = pairsArray[i][0]
+            choosedVideo = currentVid[i][0]
             console.log(`Video choosed: ${choosedVideo}`)
           return false
         } else {
@@ -650,7 +672,7 @@ var loopVideoTask = {
             whitchVideo[0] = ''
             whitchVideo[1] = ''
             console.log(whitchVideo)
-            choosedVideo = pairsArray[i][1]
+            choosedVideo = currentVid[i][1]
             console.log(`Video choosed: ${choosedVideo}`)
           return false
         } else {
@@ -725,12 +747,15 @@ var confidenceResponse = {
     data: function(){
       return {
         task: 'REPONSE SUJET',
+        participant: PARTICIPANT,
         id: uniqueID,
         date: Date(Date.now()).toLocaleString().split(',')[0],
         age: `${age}`,
         sex: `${sex}`,
         soundSystem: `${soundSystem1}`,
-        videoShowed: `${pairsArray[i]}`,
+        order: `${orderTask}`,
+        task: `${wichTask}`,
+        videoShowed: `${currentVid[i]}`,
         videoChoosed: `${choosedVideo}`,
         confidence: `${confidence}`,
       }
@@ -797,8 +822,9 @@ timeline.push(loopTraining);
 //to increment in the main loop
 var i = 0; 
   
-// The main loop for the task, with the experimental routine, depending of the number of video pairs. 
-var loopTask = {
+
+// The main loop for the task1, with the experimental routine, depending of the number of video pairs. 
+var loopTask1 = {
     timeline: [
       //preloadBeforeTask,
       loopVideoTask,
@@ -819,7 +845,90 @@ var loopTask = {
     },
   };
 
-timeline.push(loopTask)
+
+// The main loop for the task1, with the experimental routine, depending of the number of video pairs. 
+var loopTask2 = {
+    timeline: [
+      //preloadBeforeTask,
+      loopVideoTask,
+      confidenceResponse,
+      interTrial,
+      ],
+    loop_function: function(){
+      console.log(i)
+      if(i < numbVideosEvalPairs-1){
+        i++
+        console.log(`i = ${i}`)
+        return true
+      } else {
+        i = 0
+        console.log(`Loop is over`)
+        return false
+      }
+    },
+  };
+
+
+// The main loop for the task1, with the experimental routine, depending of the number of video pairs. 
+var loopTask3 = {
+    timeline: [
+      //preloadBeforeTask,
+      loopVideoTask,
+      confidenceResponse,
+      interTrial,
+      ],
+    loop_function: function(){
+      console.log(i)
+      if(i < numbVideosEvalPairs-1){
+        i++
+        console.log(`i = ${i}`)
+        return true
+      } else {
+        i = 0
+        console.log(`Loop is over`)
+        return false
+      }
+    },
+  };
+
+
+var pause = {
+  type: jsPsychHtmlButtonResponse,
+  stimulus: `<p style="font-size:25px; color:black;">Pause</p><hr>
+             <p>Prenez <b>5</b> minutes de pause.</p>
+             <p>Quand vous êtes prêt à nouveau, cliquez sur <b>Reprendre</b></p>
+            `,
+   on_start: function(){
+    k++
+    return k
+   },
+   on_load: function() {
+      // Remove progress bar from screen
+      document.getElementById("jspsych-progressbar-container").style.visibility = "hidden";
+      // reset to 0 before new phase
+      jsPsych.setProgressBar(0)
+    },
+  choices: ["Reprendre"],
+};
+
+
+
+var globalProcedure = {
+  timeline: [
+    loopTask1,
+    pause,
+    loopTask2,
+    pause,
+    loopTask3
+    ],
+};
+
+timeline.push(globalProcedure) 
+
+
+
+
+//-------------------------------------------------------------------------------------------------------------
 
 
 var freeText = {

@@ -19,8 +19,9 @@
   <script src="../lib/jspsych-7.3.0/dist/plugin-survey-text.js" type="text/javascript"></script>
   <script src="../lib/jspsych-7.3.0/dist/plugin-call-function.js" type="text/javascript"></script>
 
-  <!-- Load experiment configuration file -->
+  <!-- Load experiment configuration files -->
   <script src="js/config.js" type="text/javascript"></script>
+  <script src="js/stimuli.js" type="text/javascript"></script>
 
   <!-- Load CSS styles -->
   <link href="../lib/jspsych-7.3.0/dist/jspsych.css" rel="stylesheet" type="text/css"></link>
@@ -94,6 +95,10 @@ pairsArray = jsPsych.randomization.shuffle(pairsArray)
 console.log(pairsArray)
 
 */
+
+console.log(VIDEOS1.length)
+console.log(VIDEOS2.length)
+console.log(VIDEOS3.length)
 
 // shuffle the three videos array
 var videos1 = jsPsych.randomization.shuffle(VIDEOS1)
@@ -600,7 +605,7 @@ var videoTask = {
             currentVid = videos2
            }
 
-           console.log(`Current video is ${wichTask} with ${currentVid}`)
+           console.log(`Current video BATCH  is ${wichTask}`)
 
            if(isTraining === true){
               if(viewedVideo[0] === true && viewedVideo[1] === true){

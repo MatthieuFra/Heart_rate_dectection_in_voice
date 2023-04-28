@@ -18,7 +18,6 @@ const VIDEOS_TRAINING = [
 const VIDEOS1 = [
   ["vid/inter/stim_000_1_H.264.mp4", "vid/inter/stim_000_2_H.264.mp4"],
   ["vid/inter/stim_001_1_H.264.mp4", "vid/inter/stim_001_2_H.264.mp4"],
-  ["vid/inter/stim_001_1_H.264.mp4", "vid/inter/stim_001_2_H.264.mp4"],
   ["vid/inter/stim_002_1_H.264.mp4", "vid/inter/stim_002_2_H.264.mp4"],
   ["vid/inter/stim_003_1_H.264.mp4", "vid/inter/stim_003_2_H.264.mp4"],
   ["vid/inter/stim_004_1_H.264.mp4", "vid/inter/stim_004_2_H.264.mp4"],

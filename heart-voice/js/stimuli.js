@@ -7,6 +7,12 @@ Here's the stimuli file, to modify the stimuli displayed in the experiment.
 */
 
 
+// videos of the training phase, only one pair is required
+const VIDEOS_TRAINING = [
+  "vid/stim_090_1.mp4",
+  "vid/stim_090_1.mp4",
+  ];
+
 
 // pairs of video for first part of the experiment
 const VIDEOS1 = [
@@ -294,11 +300,6 @@ const VIDEOS3 = [
 ];
 
 
-// videos of the training phase, only one pair is required
-const VIDEOS_TRAINING = [
-  "vid/intra/stim_157_1.mp4",
-  "vid/intra/stim_157_2.mp4",
-  ];
 
 
 

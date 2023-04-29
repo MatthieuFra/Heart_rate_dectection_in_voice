@@ -721,7 +721,7 @@ var loopVideoTask = {
 var confFunc = {
   type: jsPsychCallFunction,
   func: function(){
-    console.log(counterConf)
+    //console.log(counterConf)
     if(counterConf == 1){
       confSelect[0] = 2
       confSelect[1] = 1
@@ -731,7 +731,7 @@ var confFunc = {
       confSelect[5] = "#ccc"
       confSelect[6] = "#ccc"
       confSelect[7] = "#ccc"
-      console.log(confSelect)
+      //console.log(confSelect)
       return confSelect
     } else if(counterConf == 2){
       confSelect[0] = 1
@@ -742,7 +742,7 @@ var confFunc = {
       confSelect[5] = "black"
       confSelect[6] = "#ccc"
       confSelect[7] = "#ccc"
-      console.log(confSelect)
+      //console.log(confSelect)
       return confSelect
     } else if(counterConf == 3){
       confSelect[0] = 1
@@ -753,7 +753,7 @@ var confFunc = {
       confSelect[5] = "#ccc"
       confSelect[6] = "black"
       confSelect[7] = "#ccc"
-      console.log(confSelect)
+      //console.log(confSelect)
       return confSelect
     } else if(counterConf == 4){
       confSelect[0] = 1
@@ -764,7 +764,7 @@ var confFunc = {
       confSelect[5] = "#ccc"
       confSelect[6] = "#ccc"
       confSelect[7] = "black"
-      console.log(confSelect)
+      //console.log(confSelect)
       return confSelect
     }
   }
@@ -778,7 +778,7 @@ var confidenceResponse2 = {
   choices: ['ArrowUp','ArrowDown',' '],
   on_finish: function(){
     confArrow = jsPsych.data.getLastTrialData().trials[0].response
-    console.log(confArrow)
+    //console.log(confArrow)
     return confArrow
   },
 };
@@ -793,14 +793,14 @@ var loopConfidence = {
       if(counterConf == 5){
         counterConf = 4
       }
-      console.log(`Confcount is ${counterConf}`)
+      //console.log(`Confcount is ${counterConf}`)
       return true
     } else if(confArrow == 'arrowdown')
       counterConf-- 
       if(counterConf == 0){
         counterConf = 1
       }
-      console.log(`Confcount is ${counterConf}`)
+      //console.log(`Confcount is ${counterConf}`)
       return true
   },
   on_finish: function(){

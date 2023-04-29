@@ -9,8 +9,8 @@ Here's the stimuli file, to modify the stimuli displayed in the experiment.
 
 // videos of the training phase, only one pair is required
 const VIDEOS_TRAINING = [
-  "vid/intra/stim_090_1_H.264.mp4",
-  "vid/intra/stim_090_1_H.264.mp4",
+  "vid/inter/stim_010_1_H.264.mp4",
+  "vid/inter/stim_010_2_H.264.mp4",
   ];
 
 

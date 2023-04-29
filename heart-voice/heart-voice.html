@@ -39,11 +39,8 @@ Inspired by Galvez-Pol et al's (2022) results describing our ability to depict H
 AUTHOR: Matthieu Fraticelli / fraticelli.matthieu@hotmail.fr
 
 
-- DATA TASK A,
-- DATA ORDER OF TASK, 
-- Play pairs from json
 - age negatif
-- Jupyternotebook
+
 
 */
 
@@ -75,24 +72,35 @@ var timeline = [];
   
 //CODE BELOW -------------------------------------------------------------------------------------------------------------
 
-/*
-//creating of the pairs  
-var arrayElements = VIDEOS1;
 
 
-const pairsOfArray = array => (
-  array.reduce((acc, val, i1) => [
-    ...acc,
-    ...new Array(array.length - 1 - i1).fill(0)
-      .map((v, i2) => ([array[i1], array[i1 + 1 + i2]]))
-  ], [])
-) 
+function confidenceHTML(){
+  return `
+    <p>Quel niveau de <b>confiance</b> avez-vous dans votre réponse ?</p>
+    <hr>
+    <p style="font-size: 15px"><i>Utilisez les flèches du clavier pour faire votre choix et validez avec la barre espace.</i></p>
 
-//The new array with all the pairs.
-var pairsArray = pairsOfArray(jsPsych.randomization.shuffle(arrayElements));
-pairsArray = jsPsych.randomization.shuffle(pairsArray)
-console.log(pairsArray)
-*/
+      <span style="font-size:15px;border: 1px solid #ccc; line-height: 1.4;color: #333;padding: 7.5px 20px; font-family: sans-serif; background-color: white; margin: 5px; border-radius: 5px;"><b style="font-size: 18px">↑</b></span>
+      <span style="font-size:15px;border: 1px solid #ccc; line-height: 1.4;color: #333;padding: 7.5px 20px; font-family: sans-serif; background-color: white; margin: 5px; border-radius: 5px;"><b style="font-size: 18px">↓</b></span>
+    
+      <p></p>
+
+    <hr>
+
+    <p style="border: ${confSelect[3]}px solid ${confSelect[7]}; line-height: 1.4;color: #333;padding: 7.5px 20px; font-family: sans-serif; background-color: white; margin: 5px; border-radius: 5px;">Tout à fait confiant</p>
+
+    <p style="border: ${confSelect[2]}px solid ${confSelect[6]}; line-height: 1.4;color: white;padding: 7.5px 20px; font-family: sans-serif; background-color: white; margin: 5px; border-radius: 5px;">Pas du tout confiant</p>
+
+    <p style="border: ${confSelect[1]}px solid ${confSelect[5]}; line-height: 1.4;color: white;padding: 7.5px 20px; font-family: sans-serif; background-color: white; margin: 5px; border-radius: 5px;">Pas du tout confiant</p>
+
+    <p style="border: ${confSelect[0]}px solid ${confSelect[4]}; line-height: 1.4;color: #333;padding: 7.5px 20px; font-family: sans-serif; background-color: white; margin: 5px; border-radius: 5px;">Pas du tout confiant</p>
+  
+
+  `
+};
+
+
+
 
 console.log(VIDEOS1.length)
 console.log(VIDEOS2.length)
@@ -131,6 +139,9 @@ console.log(`Number of videos pairs is: ${numbVideosEvalPairs}`)
  var orderTask; 
  var k = 0;
  var currentVid
+ var confArrow;
+ var counterConf = 1; 
+ var confSelect = [2, 1, 1, 1, "black", "#ccc", "#ccc", "#ccc",];
 
 
  /*var preloadBeforeTask = {
@@ -707,6 +718,101 @@ var loopVideoTask = {
   };
 
 
+var confFunc = {
+  type: jsPsychCallFunction,
+  func: function(){
+    console.log(counterConf)
+    if(counterConf == 1){
+      confSelect[0] = 2
+      confSelect[1] = 1
+      confSelect[2] = 1
+      confSelect[3] = 1
+      confSelect[4] = "black"
+      confSelect[5] = "#ccc"
+      confSelect[6] = "#ccc"
+      confSelect[7] = "#ccc"
+      console.log(confSelect)
+      return confSelect
+    } else if(counterConf == 2){
+      confSelect[0] = 1
+      confSelect[1] = 2
+      confSelect[2] = 1
+      confSelect[3] = 1
+      confSelect[4] = "#ccc"
+      confSelect[5] = "black"
+      confSelect[6] = "#ccc"
+      confSelect[7] = "#ccc"
+      console.log(confSelect)
+      return confSelect
+    } else if(counterConf == 3){
+      confSelect[0] = 1
+      confSelect[1] = 1
+      confSelect[2] = 2
+      confSelect[3] = 1
+      confSelect[4] = "#ccc"
+      confSelect[5] = "#ccc"
+      confSelect[6] = "black"
+      confSelect[7] = "#ccc"
+      console.log(confSelect)
+      return confSelect
+    } else if(counterConf == 4){
+      confSelect[0] = 1
+      confSelect[1] = 1
+      confSelect[2] = 1
+      confSelect[3] = 2
+      confSelect[4] = "#ccc"
+      confSelect[5] = "#ccc"
+      confSelect[6] = "#ccc"
+      confSelect[7] = "black"
+      console.log(confSelect)
+      return confSelect
+    }
+  }
+};
+
+var confidenceResponse2 = {
+  type: jsPsychHtmlKeyboardResponse,
+  stimulus: function(){
+    return confidenceHTML()
+  },
+  choices: ['ArrowUp','ArrowDown',' '],
+  on_finish: function(){
+    confArrow = jsPsych.data.getLastTrialData().trials[0].response
+    console.log(confArrow)
+    return confArrow
+  },
+};
+
+var loopConfidence = {
+  timeline: [confFunc, confidenceResponse2],
+  loop_function: function(){
+    if(confArrow == ' '){
+      return false
+    } else if(confArrow == 'arrowup'){
+      counterConf++
+      if(counterConf == 5){
+        counterConf = 4
+      }
+      console.log(`Confcount is ${counterConf}`)
+      return true
+    } else if(confArrow == 'arrowdown')
+      counterConf-- 
+      if(counterConf == 0){
+        counterConf = 1
+      }
+      console.log(`Confcount is ${counterConf}`)
+      return true
+  },
+  on_finish: function(){
+    confidence = counterConf
+    console.log(`The subject confidence is ${confidence} on 4`)
+    return confidence
+  },
+}
+
+//timeline.push(loopConfidence);
+
+/*
 var confidenceResponse = {
   type: jsPsychSurveyMultiChoice,
   questions: [
@@ -728,15 +834,15 @@ var confidenceResponse = {
     console.log(`The subject confidence is ${confidence}`)
     return confidence
   },
-}; 
+}; */
 
 
   // ISI cross fixation between trials.
   var interTrial = {
     type: jsPsychHtmlKeyboardResponse,
-    stimulus: `<p style="font-size: 70px">+</p>`,
+    stimulus: `<p style="font-size: 70px"> </p>`,
     choices: ["NO_KEYS"],
-    trial_duration: 2000,
+    trial_duration: 250,
     on_load: function() {
         if(isTraining === false){
             // Remove progress bar from screen
@@ -746,6 +852,8 @@ var confidenceResponse = {
     on_start: function(){
       var curr_progress_bar_value = jsPsych.getProgressBarCompleted();
       jsPsych.setProgressBar(curr_progress_bar_value + (1/numbVideosEvalPairs));
+      counterConf = 1
+      return counterConf
     },
     data: function(){
       return {
@@ -795,15 +903,18 @@ var endTraining = {
         `
       },
       choices: ["Commencer l'expérience"],
+      on_start: function(){
+        counterConf = 1
+        return counterConf
+      },
       on_finish: function(){
         isTraining = false
         console.log(`END TRAINING ${isTraining}`)
         return isTraining
       },
-        on_load: function() {
-      // Remove progress bar from screen
+      on_load: function() {
+        // Remove progress bar from screen
         document.getElementById("jspsych-progressbar-container").style.visibility = "hidden";
-     
       }
     };
 
@@ -811,7 +922,8 @@ var loopTraining = {
 timeline: [
   training,
   loopVideoTask,
-  confidenceResponse,
+  loopConfidence,
+  //confidenceResponse,
   endTraining
   ],
 loop_function: function(){
@@ -831,7 +943,8 @@ var loopTask1 = {
     timeline: [
       //preloadBeforeTask,
       loopVideoTask,
-      confidenceResponse,
+      loopConfidence,
+      //confidenceResponse,
       interTrial,
       ],
     loop_function: function(){
@@ -854,7 +967,8 @@ var loopTask2 = {
     timeline: [
       //preloadBeforeTask,
       loopVideoTask,
-      confidenceResponse,
+      loopConfidence,
+      //confidenceResponse,
       interTrial,
       ],
     loop_function: function(){
@@ -877,7 +991,8 @@ var loopTask3 = {
     timeline: [
       //preloadBeforeTask,
       loopVideoTask,
-      confidenceResponse,
+      loopConfidence,
+      //confidenceResponse,
       interTrial,
       ],
     loop_function: function(){

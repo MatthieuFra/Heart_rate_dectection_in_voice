@@ -38,9 +38,7 @@ Inspired by Galvez-Pol et al's (2022) results describing our ability to depict H
 
 AUTHOR: Matthieu Fraticelli / fraticelli.matthieu@hotmail.fr
 
-
 - age negatif
-
 
 */
 
@@ -98,8 +96,6 @@ function confidenceHTML(){
 
   `
 };
-
-
 
 
 console.log(VIDEOS1.length)
@@ -184,6 +180,7 @@ orderABC()
 
  // Display without the "response" part showed
  function html1(){ 
+  console.log(`FIRST ${currentVid[i][0]} SECOND: ${currentVid[i][1]}`)
   return `
           <p style="font-size: 25px">
 
@@ -247,7 +244,8 @@ orderABC()
 
   // Display with the "response" part showed
   function html2(){ 
-  return `
+    console.log(`FIRST ${currentVid[i][0]} SECOND: ${currentVid[i][1]}`)
+    return `
 
            <p style="font-size: 25px">
 

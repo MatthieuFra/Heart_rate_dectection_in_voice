@@ -55,11 +55,12 @@ var jsPsych = initJsPsych({
       message_progress_bar: 'Progression expérience',
       on_finish: function() {
       //jsPsych.data.displayData(); 
-        jsPsych.data.get().localSave('csv',`${uniqueID}_data.csv`);
+        //jsPsych.data.get().localSave('csv',`${uniqueID}_data.csv`);
        },
       on_trial_start: function() {
        },
       on_trial_finish: function(){
+        jsPsych.data.get().localSave('csv',`${uniqueID}_data.csv`);
        },
     }); 
   
@@ -476,6 +477,7 @@ var welcome = {
         return uniqueID
       },
       on_finish: function(){
+
       },
     };
     

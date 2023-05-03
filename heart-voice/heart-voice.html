@@ -53,10 +53,10 @@ AUTHOR: Matthieu Fraticelli / fraticelli.matthieu@hotmail.fr
 var jsPsych = initJsPsych({
       show_progress_bar: true,
       auto_update_progress_bar: false,
-      message_progress_bar: 'Progression expérience',
+      message_progress_bar:`Progression bloc`,
       on_finish: function() {
       //jsPsych.data.displayData(); 
-      //jsPsych.data.get().localSave('csv',`${uniqueID}_data.csv`);
+      jsPsych.data.get().localSave('csv',`${uniqueID}_data.csv`);
        },
       on_trial_start: function() {
        },
@@ -442,6 +442,11 @@ var uniqueID;
 var preload1 = {
     type: jsPsychPreload,
     video: VIDEOS1,
+    on_load: function() {
+      // Remove progress bar from screen
+      document.getElementById("jspsych-progressbar-container").style.visibility = "hidden";
+      },
+    message: `<p>Chargement Condition <b>1</b></p>`,
     on_finish: function(){
       console.log("PRELOAD 1 FINISHED")
     }
@@ -453,6 +458,7 @@ timeline.push(preload1);
 var preload2 = {
     type: jsPsychPreload,
     video: VIDEOS2,
+    message: `<p>Chargement Condition <b>2</b></p>`,
     on_finish: function(){
       console.log("PRELOAD 2 FINISHED")
     }
@@ -465,6 +471,7 @@ timeline.push(preload2);
 var preload3 = {
     type: jsPsychPreload,
     video: VIDEOS3,
+    message: `<p>Chargement Condition <b>3</b></p>`,
     on_finish: function(){
       console.log("PRELOAD 3 FINISHED")
     }
@@ -988,7 +995,6 @@ var loopTask1 = {
       interTrial,
       ],
     loop_function: function(){
-      jsPsych.data.get().localSave('csv',`${uniqueID}_data.csv`);
       console.log(i)
       if(i < numbVideosEvalPairs-1){
         i++
@@ -1013,7 +1019,6 @@ var loopTask2 = {
       interTrial,
       ],
     loop_function: function(){
-      jsPsych.data.get().localSave('csv',`${uniqueID}_data.csv`);
       console.log(i)
       if(i < numbVideosEvalPairs-1){
         i++
@@ -1038,7 +1043,6 @@ var loopTask3 = {
       interTrial,
       ],
     loop_function: function(){
-      jsPsych.data.get().localSave('csv',`${uniqueID}_data.csv`);
       console.log(i)
       if(i < numbVideosEvalPairs-1){
         i++
@@ -1068,6 +1072,9 @@ var pause = {
       document.getElementById("jspsych-progressbar-container").style.visibility = "hidden";
       // reset to 0 before new phase
       jsPsych.setProgressBar(0)
+    },
+    on_finish: function(){
+      jsPsych.data.get().localSave('csv',`${uniqueID}_data.csv`);
     },
   choices: ["Reprendre"],
 };

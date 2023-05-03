@@ -39,6 +39,7 @@ Inspired by Galvez-Pol et al's (2022) results describing our ability to depict H
 AUTHOR: Matthieu Fraticelli / fraticelli.matthieu@hotmail.fr
 
 - age negatif
+- add csv
 
 */
 
@@ -55,12 +56,12 @@ var jsPsych = initJsPsych({
       message_progress_bar: 'Progression expérience',
       on_finish: function() {
       //jsPsych.data.displayData(); 
-        //jsPsych.data.get().localSave('csv',`${uniqueID}_data.csv`);
+      //jsPsych.data.get().localSave('csv',`${uniqueID}_data.csv`);
        },
       on_trial_start: function() {
        },
       on_trial_finish: function(){
-        jsPsych.data.get().localSave('csv',`${uniqueID}_data.csv`);
+      //jsPsych.data.get().localSave('csv',`${uniqueID}_data.csv`);
        },
     }); 
   
@@ -128,6 +129,7 @@ console.log(`Number of videos pairs is: ${numbVideosEvalPairs}`)
 
 // a few variables for the DATA part.
  var choosedVideo;
+ var PARTICIPANT;
  var age;
  var sex; 
  var soundSystem1;
@@ -177,7 +179,6 @@ console.log(`Number of videos pairs is: ${numbVideosEvalPairs}`)
   }
  };
 
-orderABC()
 
  // Display without the "response" part showed
  function html1(){ 
@@ -503,8 +504,10 @@ var surveyNew = {
   html: `
   <p>Quel <b>âge</b> avez vous ?</p>
   <p><input name="first" type="number" size="30" required="true"/></p>
+  <p>Quel est votre <b>numéro de participant</b> ?</p>
+  <p><input name="parti" type="number" size="30" required="true"/></p>
   <p><label for="sexe">Quel est votre <b>sexe</b></label></p>
-<p><select id="sexe" name="sexe" size="1" required="true">
+  <p><select id="sexe" name="sexe" size="1" required="true">
   <option value="M">M</option>
   <option value="F">F</option>
 </select></p>
@@ -518,8 +521,11 @@ var surveyNew = {
   on_finish: function(){
     console.log(`Age is ${jsPsych.data.getLastTrialData().trials[0].response.first}`)
     console.log(`Sex is ${jsPsych.data.getLastTrialData().trials[0].response.sexe}`)
+    console.log(`Numb participant is ${jsPsych.data.getLastTrialData().trials[0].response.parti}`)
     age = jsPsych.data.getLastTrialData().trials[0].response.first
     sex = jsPsych.data.getLastTrialData().trials[0].response.sexe
+    PARTICIPANT = jsPsych.data.getLastTrialData().trials[0].response.parti
+    orderABC()
   },
 };
 
@@ -544,6 +550,8 @@ var trialSystem = {
 };  
   
 timeline.push(trialSystem);
+
+
 
 
 var loudnessTest1 = {
@@ -858,7 +866,7 @@ var confidenceResponse = {
     data: function(){
       return {
         task: 'REPONSE SUJET',
-        participant: PARTICIPANT,
+        participant: `${PARTICIPANT}`,
         id: uniqueID,
         date: Date(Date.now()).toLocaleString().split(',')[0],
         age: `${age}`,
@@ -866,7 +874,8 @@ var confidenceResponse = {
         soundSystem: `${soundSystem1}`,
         order: `${orderTask}`,
         task: `${wichTask}`,
-        videoShowed: `${currentVid[i]}`,
+        videoShowed1: `${currentVid[i][0]}`,
+        videoShowed2: `${currentVid[i][1]}`,
         videoChoosed: `${choosedVideo}`,
         confidence: `${confidence}`,
       }
@@ -948,6 +957,7 @@ var loopTask1 = {
       interTrial,
       ],
     loop_function: function(){
+      jsPsych.data.get().localSave('csv',`${uniqueID}_data.csv`);
       console.log(i)
       if(i < numbVideosEvalPairs-1){
         i++
@@ -972,6 +982,7 @@ var loopTask2 = {
       interTrial,
       ],
     loop_function: function(){
+      jsPsych.data.get().localSave('csv',`${uniqueID}_data.csv`);
       console.log(i)
       if(i < numbVideosEvalPairs-1){
         i++
@@ -996,6 +1007,7 @@ var loopTask3 = {
       interTrial,
       ],
     loop_function: function(){
+      jsPsych.data.get().localSave('csv',`${uniqueID}_data.csv`);
       console.log(i)
       if(i < numbVideosEvalPairs-1){
         i++

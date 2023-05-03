@@ -73,33 +73,6 @@ var timeline = [];
 //CODE BELOW -------------------------------------------------------------------------------------------------------------
 
 
-
-function confidenceHTML(){
-  return `
-    <p>Quel niveau de <b>confiance</b> avez-vous dans votre réponse ?</p>
-    <hr>
-    <p style="font-size: 15px"><i>Utilisez les flèches du clavier pour faire votre choix et validez avec la barre espace.</i></p>
-
-      <span style="font-size:15px;border: 1px solid #ccc; line-height: 1.4;color: #333;padding: 7.5px 20px; font-family: sans-serif; background-color: white; margin: 5px; border-radius: 5px;"><b style="font-size: 18px">↑</b></span>
-      <span style="font-size:15px;border: 1px solid #ccc; line-height: 1.4;color: #333;padding: 7.5px 20px; font-family: sans-serif; background-color: white; margin: 5px; border-radius: 5px;"><b style="font-size: 18px">↓</b></span>
-    
-      <p></p>
-
-    <hr>
-
-    <p style="border: ${confSelect[3]}px solid ${confSelect[7]}; line-height: 1.4;color: #333;padding: 7.5px 20px; font-family: sans-serif; background-color: white; margin: 5px; border-radius: 5px;">Tout à fait confiant</p>
-
-    <p style="border: ${confSelect[2]}px solid ${confSelect[6]}; line-height: 1.4;color: white;padding: 7.5px 20px; font-family: sans-serif; background-color: white; margin: 5px; border-radius: 5px;">Pas du tout confiant</p>
-
-    <p style="border: ${confSelect[1]}px solid ${confSelect[5]}; line-height: 1.4;color: white;padding: 7.5px 20px; font-family: sans-serif; background-color: white; margin: 5px; border-radius: 5px;">Pas du tout confiant</p>
-
-    <p style="border: ${confSelect[0]}px solid ${confSelect[4]}; line-height: 1.4;color: #333;padding: 7.5px 20px; font-family: sans-serif; background-color: white; margin: 5px; border-radius: 5px;">Pas du tout confiant</p>
-  
-
-  `
-};
-
-
 console.log(VIDEOS1.length)
 console.log(VIDEOS2.length)
 console.log(VIDEOS3.length)
@@ -172,6 +145,32 @@ console.log(`Number of videos pairs is: ${numbVideosEvalPairs}`)
     return orderTask
   }
  };
+
+// display the confidence form
+function confidenceHTML(){
+  return `
+    <p>Quel niveau de <b>confiance</b> avez-vous dans votre réponse ?</p>
+    <hr>
+    <p style="font-size: 15px"><i>Utilisez les flèches du clavier pour faire votre choix et validez avec la barre espace.</i></p>
+
+      <span style="font-size:15px;border: 1px solid #ccc; line-height: 1.4;color: #333;padding: 7.5px 20px; font-family: sans-serif; background-color: white; margin: 5px; border-radius: 5px;"><b style="font-size: 18px">↑</b></span>
+      <span style="font-size:15px;border: 1px solid #ccc; line-height: 1.4;color: #333;padding: 7.5px 20px; font-family: sans-serif; background-color: white; margin: 5px; border-radius: 5px;"><b style="font-size: 18px">↓</b></span>
+    
+      <p></p>
+
+    <hr>
+
+    <p style="border: ${confSelect[3]}px solid ${confSelect[7]}; line-height: 1.4;color: #333;padding: 7.5px 20px; font-family: sans-serif; background-color: white; margin: 5px; border-radius: 5px;">Tout à fait confiant</p>
+
+    <p style="border: ${confSelect[2]}px solid ${confSelect[6]}; line-height: 1.4;color: #333;padding: 7.5px 20px; font-family: sans-serif; background-color: white; margin: 5px; border-radius: 5px;">Confiant</p>
+
+    <p style="border: ${confSelect[1]}px solid ${confSelect[5]}; line-height: 1.4;color: #333;padding: 7.5px 20px; font-family: sans-serif; background-color: white; margin: 5px; border-radius: 5px;">Pas confiant</p>
+
+    <p style="border: ${confSelect[0]}px solid ${confSelect[4]}; line-height: 1.4;color: #333;padding: 7.5px 20px; font-family: sans-serif; background-color: white; margin: 5px; border-radius: 5px;">Pas du tout confiant</p>
+  
+
+  `
+};
 
 
  // Display without the "response" part showed

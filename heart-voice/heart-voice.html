@@ -143,12 +143,6 @@ console.log(`Number of videos pairs is: ${numbVideosEvalPairs}`)
  var confSelect = [2, 1, 1, 1, "black", "#ccc", "#ccc", "#ccc",];
 
 
- /*var preloadBeforeTask = {
-    type: jsPsychPreload,
-    video: function(){
-      return [pairsArray[i][0], pairsArray[i][1]]
-    },
-  };*/
 
  // In order to assign the correct ABC order based on the PARTICIPANT number 
  function orderABC(){
@@ -444,6 +438,21 @@ console.log(`Number of videos pairs is: ${numbVideosEvalPairs}`)
 
 var uniqueID; 
 
+var totalVid = [];
+totalVid = totalVid.concat(VIDEOS1, VIDEOS2, VIDEOS3)
+//console.log(`totalVid = ${totalVid}`)
+
+var preload = {
+    type: jsPsychPreload,
+    video: totalVid,
+    on_finish: function(){
+      console.log("PRELOAD FINISHED")
+    }
+  
+};
+
+timeline.push(preload);
+
 //The first screen when launching the experiment
 var welcome = {
       
@@ -483,6 +492,7 @@ var welcome = {
     };
     
 timeline.push(welcome);
+
 
 //To switch in fullscreen
 var enter_fullscreen = {

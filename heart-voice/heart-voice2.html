@@ -74,16 +74,26 @@ var timeline = [];
 //CODE BELOW -------------------------------------------------------------------------------------------------------------
 
 
-console.log(VIDEOS1.length)
-console.log(VIDEOS2.length)
-console.log(VIDEOS3.length)
 
-console.log(all_trials[0])
+console.log(all_trials.length)
+
+var cond1 = all_trials.slice(0, 90)
+var cond2 = all_trials.slice(90, 180)
+var cond3 = all_trials.slice(180, 271)
+
+console.log(cond1[0])
+console.log(cond2[0])
+console.log(cond3[0])
+
+console.log(cond1.length)
+console.log(cond2.length)
+console.log(cond3.length)
 
 // shuffle the three videos array
-var videos1 = jsPsych.randomization.shuffle(VIDEOS1)
-var videos2 = jsPsych.randomization.shuffle(VIDEOS2)
-var videos3 = jsPsych.randomization.shuffle(VIDEOS3)
+cond1 = jsPsych.randomization.shuffle(cond1)
+cond2 = jsPsych.randomization.shuffle(cond2)
+cond3 = jsPsych.randomization.shuffle(cond3)
+
 
 
 /*  
@@ -91,7 +101,7 @@ var numbVidsEval = arrayElements.length
 console.log(`Number of videos is: ${numbVidsEval}`)
 */
 
-var numbVideosEvalPairs = videos1.length
+var numbVideosEvalPairs = cond1.length
 console.log(`Number of videos pairs is: ${numbVideosEvalPairs}`)
 
 
@@ -117,6 +127,7 @@ console.log(`Number of videos pairs is: ${numbVideosEvalPairs}`)
  var confArrow;
  var counterConf = 1; 
  var confSelect = [2, 1, 1, 1, "black", "#ccc", "#ccc", "#ccc",];
+ var filePath;
 
 
 
@@ -178,7 +189,7 @@ function confidenceHTML(){
 
  // Display without the "response" part showed
  function html1(){ 
-  console.log(`FIRST ${currentVid[i][0]} SECOND: ${currentVid[i][1]}`)
+  console.log(`FIRST ${filePath}${currentVid[i].stim_video_1} SECOND: ${filePath}${currentVid[i].stim_video_2}`)
   return `
           <p style="font-size: 25px">
 
@@ -197,11 +208,11 @@ function confidenceHTML(){
             <div style="display: flex; justify-content: space-between;"">
 
                 <video width="320" height="240" ${whitchVideo[0]}>
-                   <source src="${currentVid[i][0]}" type="video/mp4">
+                   <source src="${filePath}${currentVid[i].stim_video_1}" type="video/mp4">
                 </video>
 
                 <video width="320" height="240" ${whitchVideo[1]}>
-                   <source src="${currentVid[i][1]}" type="video/mp4">
+                   <source src="${filePath}${currentVid[i].stim_video_2}" type="video/mp4">
                 </video>
 
           </div>
@@ -242,7 +253,7 @@ function confidenceHTML(){
 
   // Display with the "response" part showed
   function html2(){ 
-    console.log(`FIRST ${currentVid[i][0]} SECOND: ${currentVid[i][1]}`)
+    console.log(`FIRST ${filePath}${currentVid[i].stim_video_1} SECOND: ${filePath}${currentVid[i].stim_video_2}`)
     return `
 
            <p style="font-size: 25px">
@@ -262,11 +273,11 @@ function confidenceHTML(){
             <div style="display: flex; justify-content: space-between;"">
 
                 <video width="320" height="240" ${whitchVideo[0]}>
-                   <source src="${currentVid[i][0]}" type="video/mp4">
+                   <source src="${filePath}${currentVid[i].stim_video_1}" type="video/mp4">
                 </video>
 
                 <video width="320" height="240" ${whitchVideo[1]}>
-                   <source src="${currentVid[i][1]}" type="video/mp4">
+                   <source src="${filePath}${currentVid[i].stim_video_2}" type="video/mp4">
                 </video>
 
           </div>
@@ -655,11 +666,14 @@ var videoTask = {
            console.log(`K is ${k}`)
            wichTask = orderTask[k]
            if(wichTask === 1){
-            currentVid = videos1
+            currentVid = cond1
+            filePath = 'vid/inter/'
            } else if(wichTask === 2){
-            currentVid = videos2
+            currentVid = cond2
+            filePath = 'vid/intra/'
            } else if(wichTask === 3){
-            currentVid = videos3
+            currentVid = cond3
+            filePath = 'vid/transform/'
            }
 
            console.log(`Current video BATCH  is ${wichTask}`)
@@ -714,7 +728,7 @@ var loopVideoTask = {
             whitchVideo[0] = ''
             whitchVideo[1] = ''
             console.log(whitchVideo)
-            choosedVideo = currentVid[i][0]
+            choosedVideo = currentVid[i].stim_video_1
             console.log(`Video choosed: ${choosedVideo}`)
           return false
         } else {
@@ -734,7 +748,7 @@ var loopVideoTask = {
             whitchVideo[0] = ''
             whitchVideo[1] = ''
             console.log(whitchVideo)
-            choosedVideo = currentVid[i][1]
+            choosedVideo = currentVid[i].stim_video_2
             console.log(`Video choosed: ${choosedVideo}`)
           return false
         } else {
@@ -914,10 +928,40 @@ var confidenceResponse = {
         soundSystem: `${soundSystem1}`,
         order: `${orderTask}`,
         wichTask: `${wichTask}`,
-        videoShowed1: `${currentVid[i][0]}`,
-        videoShowed2: `${currentVid[i][1]}`,
+        videoShowed1: `${currentVid[i].stim_video_1}`,
+        videoShowed2: `${currentVid[i].stim_video_2}`,
         videoChoosed: `${choosedVideo}`,
         confidence: `${confidence}`,
+
+        //add info from csv all_trial
+        trial: `${currentVid[i].trial}`,
+        subject_1: `${currentVid[i].subject_1}`,
+        trial_1: `${currentVid[i].trial_1}`,
+        subject_2: `${currentVid[i].subject_2}`,
+        trial_2: `${currentVid[i].trial_2}`,
+        original_audio_1: `${currentVid[i].original_audio_1}`,
+        original_ppg_1: `${currentVid[i].original_ppg_1}`,
+        pitch_1: `${currentVid[i].pitch_1}`,
+        bpm_1: `${currentVid[i].bpm_1}`,
+        original_audio_2: `${currentVid[i].original_audio_2}`,
+        original_ppg_2: `${currentVid[i].original_ppg_2}`,
+        pitch_2: `${currentVid[i].pitch_2}`,
+        bpm_2: `${currentVid[i].bpm_2}`,
+        delta_BPM: `${currentVid[i].delta_BPM}`,
+        delta_pitch: `${currentVid[i].delta_pitch}`,
+        delta_BPM_tier: `${currentVid[i].delta_BPM_tier}`,
+        delta_pitch_tier: `${currentVid[i].delta_pitch_tier}`,
+        cell_code: `${currentVid[i].cell_code}`,
+        condition: `${currentVid[i].condition}`,
+        trial_id: `${currentVid[i].trial_id}`,
+        true_response: `${currentVid[i].true_response}`,
+        stim_audio_1: `${currentVid[i].stim_audio_1}`,
+        stim_audio_2: `${currentVid[i].stim_audio_2}`,
+        stim_ppg_1: `${currentVid[i].stim_ppg_1}`,
+        stim_ppg_2: `${currentVid[i].stim_ppg_2}`,
+        stim_video_1: `${currentVid[i].stim_video_1}`,
+        stim_video_2: `${currentVid[i].stim_video_2}`,
+        pitch_post_transform: `${currentVid[i].pitch_post_transform}`,
       }
     }
   };

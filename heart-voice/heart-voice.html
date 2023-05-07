@@ -983,6 +983,30 @@ timeline.push(loopTraining);
 //to increment in the main loop
 var i = 0; 
   
+var wichInstruction; 
+var currentInstruction;
+
+var consigneBloc = {
+      type: jsPsychHtmlButtonResponse,
+      stimulus: function(){
+           wichInstruction = orderTask[k]
+           if(wichInstruction === 1){
+            currentInstruction = CONSIGNE_BLOC1
+           } else if(wichInstruction === 2){
+            currentInstruction = CONSIGNE_BLOC2
+           } else if(wichInstruction === 3){
+            currentInstruction = CONSIGNE_BLOC3
+           }
+
+        return `<p style="font-size: 25px">
+        <b>Instructions condition ${k+1}</b></p>
+        <hr>
+        <p>${currentInstruction}</p>
+        `
+      },
+      choices: ["Débuter l'expérience"],
+    };  
+
 
 // The main loop for the task1, with the experimental routine, depending of the number of video pairs. 
 var loopTask1 = {
@@ -1082,10 +1106,13 @@ var pause = {
 
 var globalProcedure = {
   timeline: [
+    consigneBloc,
     loopTask1,
     pause,
+    consigneBloc,
     loopTask2,
     pause,
+    consigneBloc,
     loopTask3
     ],
 };

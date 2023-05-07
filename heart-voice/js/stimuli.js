@@ -19,7 +19,7 @@ const VIDEOS1 = [
   ["vid/inter/stim_000_1.mp4", "vid/inter/stim_000_2.mp4"],
   ["vid/inter/stim_001_1.mp4", "vid/inter/stim_001_2.mp4"],
   ["vid/inter/stim_002_1.mp4", "vid/inter/stim_002_2.mp4"],
-  ["vid/inter/stim_003_1.mp4", "vid/inter/stim_003_2.mp4"],
+ /* ["vid/inter/stim_003_1.mp4", "vid/inter/stim_003_2.mp4"],
   ["vid/inter/stim_004_1.mp4", "vid/inter/stim_004_2.mp4"],
   ["vid/inter/stim_005_1.mp4", "vid/inter/stim_005_2.mp4"],
   ["vid/inter/stim_006_1.mp4", "vid/inter/stim_006_2.mp4"],
@@ -105,7 +105,7 @@ const VIDEOS1 = [
   ["vid/inter/stim_086_1.mp4", "vid/inter/stim_086_2.mp4"],
   ["vid/inter/stim_087_1.mp4", "vid/inter/stim_087_2.mp4"],
   ["vid/inter/stim_088_1.mp4", "vid/inter/stim_088_2.mp4"],
-  ["vid/inter/stim_089_1.mp4", "vid/inter/stim_089_2.mp4"],
+  ["vid/inter/stim_089_1.mp4", "vid/inter/stim_089_2.mp4"],*/
 
 ];
 
@@ -114,7 +114,7 @@ const VIDEOS2 = [
   ["vid/intra/stim_090_1.mp4", "vid/intra/stim_090_2.mp4"],
   ["vid/intra/stim_091_1.mp4", "vid/intra/stim_091_2.mp4"],
   ["vid/intra/stim_092_1.mp4", "vid/intra/stim_092_2.mp4"],
-  ["vid/intra/stim_093_1.mp4", "vid/intra/stim_093_2.mp4"],
+ /* ["vid/intra/stim_093_1.mp4", "vid/intra/stim_093_2.mp4"],
   ["vid/intra/stim_094_1.mp4", "vid/intra/stim_094_2.mp4"],
   ["vid/intra/stim_095_1.mp4", "vid/intra/stim_095_2.mp4"],
   ["vid/intra/stim_096_1.mp4", "vid/intra/stim_096_2.mp4"],
@@ -200,7 +200,7 @@ const VIDEOS2 = [
   ["vid/intra/stim_176_1.mp4", "vid/intra/stim_176_2.mp4"],
   ["vid/intra/stim_177_1.mp4", "vid/intra/stim_177_2.mp4"],
   ["vid/intra/stim_178_1.mp4", "vid/intra/stim_178_2.mp4"],
-  ["vid/intra/stim_179_1.mp4", "vid/intra/stim_179_2.mp4"],
+  ["vid/intra/stim_179_1.mp4", "vid/intra/stim_179_2.mp4"],*/
 
 ];
 
@@ -210,7 +210,7 @@ const VIDEOS3 = [
   ["vid/transform/stim_180_1.mp4", "vid/transform/stim_180_2.mp4"],
   ["vid/transform/stim_181_1.mp4", "vid/transform/stim_181_2.mp4"],
   ["vid/transform/stim_182_1.mp4", "vid/transform/stim_182_2.mp4"],
-  ["vid/transform/stim_183_1.mp4", "vid/transform/stim_183_2.mp4"],
+/*  ["vid/transform/stim_183_1.mp4", "vid/transform/stim_183_2.mp4"],
   ["vid/transform/stim_184_1.mp4", "vid/transform/stim_184_2.mp4"],
   ["vid/transform/stim_185_1.mp4", "vid/transform/stim_185_2.mp4"],
   ["vid/transform/stim_186_1.mp4", "vid/transform/stim_186_2.mp4"],
@@ -296,7 +296,7 @@ const VIDEOS3 = [
   ["vid/transform/stim_266_1.mp4", "vid/transform/stim_266_2.mp4"],
   ["vid/transform/stim_267_1.mp4", "vid/transform/stim_267_2.mp4"],
   ["vid/transform/stim_268_1.mp4", "vid/transform/stim_268_2.mp4"],
-  ["vid/transform/stim_269_1.mp4", "vid/transform/stim_269_2.mp4"],
+  ["vid/transform/stim_269_1.mp4", "vid/transform/stim_269_2.mp4"], */
 ];
 
 

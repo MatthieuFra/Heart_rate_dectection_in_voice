@@ -12,5 +12,8 @@ The experiment is implemented using the jsPsych library, and a preprocessing Pyt
 
 The experiment consist in the presentation of two sound stimuli, the voice of participant, with a visual indication of the heart rate. The participant then have to choose between the two pairs, which one seems to be the correct one for them. 
 
+The website of the experiment is available here : 
+https://matthieufra.github.io/Heart_rate_dectection_in_voice/
+
 You can run the experiment in your own browser here : 
 https://matthieufra.github.io/Heart_rate_dectection_in_voice/heart-voice/heart-voice2.html
